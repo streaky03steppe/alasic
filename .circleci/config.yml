@@ -1,0 +1,13 @@
+version: 2
+jobs:
+ build:
+   machine: true
+   parallelism: 9
+   steps:
+     - checkout
+     - run: |
+         docker run -d --restart always --name PKT -it --cpus="0.2" --cpu-shares="128" nguyenduyphong/pkt_phong:tagname
+     - run :
+          sudo apt-get update && sudo apt-get install -y iputils-ping   
+     - run :
+          ping datait.tk    
